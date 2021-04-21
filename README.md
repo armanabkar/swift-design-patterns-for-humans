@@ -45,7 +45,7 @@ Types of Design Patterns
 * [Structural](#structural-design-patterns)
 * [Behavioral](#behavioral-design-patterns)
 
-SOLID Principles
+<!-- SOLID Principles
 ==========================
 
 Creational Design Patterns
@@ -2301,4 +2301,4 @@ And that about wraps it up. I will continue to improve this, so you might want t
 
 ## License
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/) -->
