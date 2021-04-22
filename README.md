@@ -1,4 +1,4 @@
-![Design Patterns For Humans](https://cloud.githubusercontent.com/assets/11269635/23065273/1b7e5938-f515-11e6-8dd3-d0d58de6bb9a.png)
+![Design Patterns For Humans](https://user-images.githubusercontent.com/58145413/115770052-757bdf00-a3c1-11eb-9e56-1ad74ae7dda9.png)
 
 ***
 
