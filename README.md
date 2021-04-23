@@ -344,7 +344,7 @@ final class DeLorean: TimeTraveling {
 }
 
 final class EmmettBrown {
-	private let timeMachine: TimeTraveling
+	private let timeMachine: TimeTraveling`
 
 ```
  
@@ -399,55 +399,53 @@ Wikipedia says
 **Programmatic Example**
 
 First of all we have a door interface and the implementation
-```php
-interface Door
-{
-    public function getWidth(): float;
-    public function getHeight(): float;
+
+```swift
+protocol Door {
+    func getWidth() -> Float;
+    func getHeight() -> Float;
 }
 
-class WoodenDoor implements Door
-{
-    protected $width;
-    protected $height;
-
-    public function __construct(float $width, float $height)
-    {
-        $this->width = $width;
-        $this->height = $height;
+class WoodenDoor: Door {
+    private let width: Float;
+    private let height: Float;
+    
+    init(width: Float, height: Float) {
+        self.width = width
+        self.height = height
     }
-
-    public function getWidth(): float
-    {
-        return $this->width;
+    
+    func getWidth() -> Float {
+        return self.width;
     }
-
-    public function getHeight(): float
-    {
-        return $this->height;
+    
+    func getHeight() -> Float {
+        return self.height;
     }
 }
 ```
+
 Then we have our door factory that makes the door and returns it
-```php
-class DoorFactory
-{
-    public static function makeDoor($width, $height): Door
-    {
-        return new WoodenDoor($width, $height);
+
+```swift
+class DoorFactory {
+    static func makeDoor(width: Float, height: Float) -> Door {
+        return WoodenDoor(width: width, height: height);
     }
 }
 ```
-And then it can be used as
-```php
-// Make me a door of 100x200
-$door = DoorFactory::makeDoor(100, 200);
 
-echo 'Width: ' . $door->getWidth();
-echo 'Height: ' . $door->getHeight();
+And then it can be used as
+
+```swift
+// Make me a door of 100x200
+let door = DoorFactory.makeDoor(width: 100, height: 200);
+
+print("Width: \(door.getWidth())")
+print("Height: \(door.getHeight())")
 
 // Make me a door of 50x100
-$door2 = DoorFactory::makeDoor(50, 100);
+let door2 = DoorFactory.makeDoor(width: 50, height: 100);
 ```
 
 **When to Use?**
