@@ -68,7 +68,6 @@ A class should have one, and only one, reason to change. ([read more](https://do
 Example:
 
 ```swift
-
 protocol Openable {
     mutating func open()
 }
@@ -124,25 +123,16 @@ final class DoorCloser {
 
 let door = PodBayDoor()
 
-```
- 
-> ⚠ Only the `DoorOpener` is responsible for opening the door.
-
-```swift
+// ⚠ Only the `DoorOpener` is responsible for opening the door.
 
 let doorOpener = DoorOpener(door: door)
 doorOpener.execute()
 
-```
- 
-> ⚠ If another operation should be made upon closing the door,
-> like switching on the alarm, you don't have to change the `DoorOpener` class.
-
-```swift
+// ⚠ If another operation should be made upon closing the door,
+// like switching on the alarm, you don't have to change the `DoorOpener` class.
 
 let doorCloser = DoorCloser(door: door)
 doorCloser.execute()
-
 ```
 
 ✋ The Open Closed Principle
@@ -153,7 +143,6 @@ You should be able to extend a classes behavior, without modifying it. ([read mo
 Example:
  
 ```swift
-
 protocol Shooting {
     func shoot() -> String
 }
@@ -183,13 +172,9 @@ let laser = LaserBeam()
 var weapons = WeaponsComposite(weapons: [laser])
 
 weapons.shoot()
+// I'm a rocket launcher. I can shoot a rocket.
 
-```
- 
-I'm a rocket launcher. I can shoot a rocket.
-> ⚠️ To add rocket launcher support I don't need to change anything in existing classes.
-
-```swift
+// ⚠️ To add rocket launcher support I don't need to change anything in existing classes.
 
 final class RocketLauncher: Shooting {
     func shoot() -> String {
@@ -201,7 +186,6 @@ let rocket = RocketLauncher()
 
 weapons = WeaponsComposite(weapons: [laser, rocket])
 weapons.shoot()
-
 ```
 
 👥 The Liskov Substitution Principle
@@ -212,7 +196,6 @@ Derived classes must be substitutable for their base classes. ([read more](http:
 Example:
 
 ```swift
-
 let requestKey: String = "NSURLRequestKey"
 
 // I'm a NSError subclass. I provide additional functionality but don't mess with original ones.
@@ -249,7 +232,6 @@ let error: Int? = result.error?.code
 if let requestError = result.error as? RequestError {
     requestError.request
 }
-
 ```
 
 🍴 The Interface Segregation Principle
@@ -260,7 +242,6 @@ Make fine grained interfaces that are client specific. ([read more](http://docs.
 Example:
  
 ```swift
-
 // I have a landing site.
 protocol LandingSiteHaving {
     var landingSite: String { get }
@@ -283,12 +264,8 @@ protocol PayloadFetching {
 }
 
 final class InternationalSpaceStation: PayloadFetching {
+    // ⚠ Space station has no idea about landing capabilities of SpaceXCRS8.
 
-```
- 
-> ⚠ Space station has no idea about landing capabilities of SpaceXCRS8.
-
-```swift
     func fetchPayload(vehicle: PayloadHaving) -> String {
         return "Deployed \(vehicle.payload) at April 10, 2016, 11:23 UTC"
     }
@@ -305,12 +282,8 @@ final class SpaceXCRS8: Landing, PayloadHaving {
 
     let payload = "BEAM and some Cube Sats"
 
-```
- 
-> ⚠ CRS8 knows only about the landing site information.
-
-```swift
-
+    // ⚠ CRS8 knows only about the landing site information.
+    
     func land(on: LandingSiteHaving) -> String {
         return "Landed on \(on.landingSite) at April 8, 2016 20:52 UTC"
     }
@@ -332,7 +305,6 @@ Depend on abstractions, not on concretions. ([read more](http://docs.google.com/
 Example:
 
 ```swift
-
 protocol TimeTraveling {
     func travelInTime(time: TimeInterval) -> String
 }
@@ -346,11 +318,7 @@ final class DeLorean: TimeTraveling {
 final class EmmettBrown {
 	private let timeMachine: TimeTraveling`
 
-```
- 
-> ⚠ Emmet Brown is given the `DeLorean` as a `TimeTraveling` device, not the concrete class `DeLorean`.
-
-```swift
+    // ⚠ Emmet Brown is given the `DeLorean` as a `TimeTraveling` device, not the concrete class `DeLorean`.
 
 	init(timeMachine: TimeTraveling) {
 		self.timeMachine = timeMachine
@@ -468,7 +436,7 @@ Wikipedia says
 
 Taking our hiring manager example above. First of all we have an interviewer interface and some implementations for it
 
-```php
+```swift
 interface Interviewer
 {
     public function askQuestions();
@@ -493,7 +461,7 @@ class CommunityExecutive implements Interviewer
 
 Now let us create our `HiringManager`
 
-```php
+```swift
 abstract class HiringManager
 {
 
@@ -509,7 +477,7 @@ abstract class HiringManager
 
 ```
 Now any child can extend it and provide the required interviewer
-```php
+```swift
 class DevelopmentManager extends HiringManager
 {
     protected function makeInterviewer(): Interviewer
@@ -528,7 +496,7 @@ class MarketingManager extends HiringManager
 ```
 and then it can be used as
 
-```php
+```swift
 $devManager = new DevelopmentManager();
 $devManager->takeInterview(); // Output: Asking about design patterns
 
@@ -556,7 +524,7 @@ Wikipedia says
 
 Translating the door example above. First of all we have our `Door` interface and some implementation for it
 
-```php
+```swift
 interface Door
 {
     public function getDescription();
@@ -580,7 +548,7 @@ class IronDoor implements Door
 ```
 Then we have some fitting experts for each door type
 
-```php
+```swift
 interface DoorFittingExpert
 {
     public function getDescription();
@@ -604,7 +572,7 @@ class Carpenter implements DoorFittingExpert
 ```
 
 Now we have our abstract factory that would let us make family of related objects i.e. wooden door factory would create a wooden door and wooden door fitting expert and iron door factory would create an iron door and iron door fitting expert
-```php
+```swift
 interface DoorFactory
 {
     public function makeDoor(): Door;
@@ -640,7 +608,7 @@ class IronDoorFactory implements DoorFactory
 }
 ```
 And then it can be used as
-```php
+```swift
 $woodenFactory = new WoodenDoorFactory();
 
 $door = $woodenFactory->makeDoor();
@@ -678,7 +646,7 @@ Wikipedia says
 
 Having said that let me add a bit about what telescoping constructor anti-pattern is. At one point or the other we have all seen a constructor like below:
 
-```php
+```swift
 public function __construct($size, $cheese = true, $pepperoni = true, $tomato = false, $lettuce = true)
 {
 }
@@ -690,7 +658,7 @@ As you can see; the number of constructor parameters can quickly get out of hand
 
 The sane alternative is to use the builder pattern. First of all we have our burger that we want to make
 
-```php
+```swift
 class Burger
 {
     protected $size;
@@ -713,7 +681,7 @@ class Burger
 
 And then we have the builder
 
-```php
+```swift
 class BurgerBuilder
 {
     public $size;
@@ -760,7 +728,7 @@ class BurgerBuilder
 ```
 And then it can be used as:
 
-```php
+```swift
 $burger = (new BurgerBuilder(14))
                     ->addPepperoni()
                     ->addLettuce()
@@ -789,7 +757,7 @@ In short, it allows you to create a copy of an existing object and modify it to 
 
 In PHP, it can be easily done using `clone`
 
-```php
+```swift
 class Sheep
 {
     protected $name;
@@ -823,7 +791,7 @@ class Sheep
 }
 ```
 Then it can be cloned like below
-```php
+```swift
 $original = new Sheep('Jolly');
 echo $original->getName(); // Jolly
 echo $original->getCategory(); // Mountain Sheep
@@ -857,7 +825,7 @@ Singleton pattern is actually considered an anti-pattern and overuse of it shoul
 **Programmatic Example**
 
 To create a singleton, make the constructor private, disable cloning, disable extension and create a static variable to house the instance
-```php
+```swift
 final class President
 {
     private static $instance;
@@ -888,7 +856,7 @@ final class President
 }
 ```
 Then in order to use
-```php
+```swift
 $president1 = President::getInstance();
 $president2 = President::getInstance();
 
@@ -930,7 +898,7 @@ Consider a game where there is a hunter and he hunts lions.
 
 First we have an interface `Lion` that all types of lions have to implement
 
-```php
+```swift
 interface Lion
 {
     public function roar();
@@ -951,7 +919,7 @@ class AsianLion implements Lion
 }
 ```
 And hunter expects any implementation of `Lion` interface to hunt.
-```php
+```swift
 class Hunter
 {
     public function hunt(Lion $lion)
@@ -963,7 +931,7 @@ class Hunter
 
 Now let's say we have to add a `WildDog` in our game so that hunter can hunt that also. But we can't do that directly because dog has a different interface. To make it compatible for our hunter, we will have to create an adapter that is compatible
 
-```php
+```swift
 // This needs to be added to the game
 class WildDog
 {
@@ -990,7 +958,7 @@ class WildDogAdapter implements Lion
 ```
 And now the `WildDog` can be used in our game using `WildDogAdapter`.
 
-```php
+```swift
 $wildDog = new WildDog();
 $wildDogAdapter = new WildDogAdapter($wildDog);
 
@@ -1015,7 +983,7 @@ Wikipedia says
 
 Translating our WebPage example from above. Here we have the `WebPage` hierarchy
 
-```php
+```swift
 interface WebPage
 {
     public function __construct(Theme $theme);
@@ -1053,7 +1021,7 @@ class Careers implements WebPage
 }
 ```
 And the separate theme hierarchy
-```php
+```swift
 
 interface Theme
 {
@@ -1083,7 +1051,7 @@ class AquaTheme implements Theme
 }
 ```
 And both the hierarchies
-```php
+```swift
 $darkTheme = new DarkTheme();
 
 $about = new About($darkTheme);
@@ -1109,7 +1077,7 @@ Wikipedia says
 
 Taking our employees example from above. Here we have different employee types
 
-```php
+```swift
 interface Employee
 {
     public function __construct(string $name, float $salary);
@@ -1188,7 +1156,7 @@ class Designer implements Employee
 
 Then we have an organization which consists of several different types of employees
 
-```php
+```swift
 class Organization
 {
     protected $employees;
@@ -1213,7 +1181,7 @@ class Organization
 
 And then it can be used as
 
-```php
+```swift
 // Prepare the employees
 $john = new Developer('John Doe', 12000);
 $jane = new Designer('Jane Doe', 15000);
@@ -1243,7 +1211,7 @@ Wikipedia says
 
 Lets take coffee for example. First of all we have a simple coffee implementing the coffee interface
 
-```php
+```swift
 interface Coffee
 {
     public function getCost();
@@ -1264,7 +1232,7 @@ class SimpleCoffee implements Coffee
 }
 ```
 We want to make the code extensible to allow options to modify it if required. Lets make some add-ons (decorators)
-```php
+```swift
 class MilkCoffee implements Coffee
 {
     protected $coffee;
@@ -1328,7 +1296,7 @@ class VanillaCoffee implements Coffee
 
 Lets make a coffee now
 
-```php
+```swift
 $someCoffee = new SimpleCoffee();
 echo $someCoffee->getCost(); // 10
 echo $someCoffee->getDescription(); // Simple Coffee
@@ -1362,7 +1330,7 @@ Wikipedia says
 
 Taking our computer example from above. Here we have the computer class
 
-```php
+```swift
 class Computer
 {
     public function getElectricShock()
@@ -1402,7 +1370,7 @@ class Computer
 }
 ```
 Here we have the facade
-```php
+```swift
 class ComputerFacade
 {
     protected $computer;
@@ -1429,7 +1397,7 @@ class ComputerFacade
 }
 ```
 Now to use the facade
-```php
+```swift
 $computer = new ComputerFacade(new Computer());
 $computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
 $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
@@ -1451,7 +1419,7 @@ Wikipedia says
 
 Translating our tea example from above. First of all we have tea types and tea maker
 
-```php
+```swift
 // Anything that will be cached is flyweight.
 // Types of tea here will be flyweights.
 class KarakTea
@@ -1476,7 +1444,7 @@ class TeaMaker
 
 Then we have the `TeaShop` which takes orders and serves them
 
-```php
+```swift
 class TeaShop
 {
     protected $orders;
@@ -1502,7 +1470,7 @@ class TeaShop
 ```
 And it can be used as below
 
-```php
+```swift
 $teaMaker = new TeaMaker();
 $shop = new TeaShop($teaMaker);
 
@@ -1531,7 +1499,7 @@ Wikipedia says
 
 Taking our security door example from above. Firstly we have the door interface and an implementation of door
 
-```php
+```swift
 interface Door
 {
     public function open();
@@ -1552,7 +1520,7 @@ class LabDoor implements Door
 }
 ```
 Then we have a proxy to secure any doors that we want
-```php
+```swift
 class SecuredDoor
 {
     protected $door;
@@ -1583,7 +1551,7 @@ class SecuredDoor
 }
 ```
 And here is how it can be used
-```php
+```swift
 $door = new SecuredDoor(new LabDoor());
 $door->open('invalid'); // Big no! It ain't possible.
 
@@ -1628,7 +1596,7 @@ Wikipedia says
 
 Translating our account example above. First of all we have a base account having the logic for chaining the accounts together and some accounts
 
-```php
+```swift
 abstract class Account
 {
     protected $successor;
@@ -1690,7 +1658,7 @@ class Bitcoin extends Account
 
 Now let's prepare the chain using the links defined above (i.e. Bank, Paypal, Bitcoin)
 
-```php
+```swift
 // Let's prepare a chain like below
 //      $bank->$paypal->$bitcoin
 //
@@ -1731,7 +1699,7 @@ Wikipedia says
 **Programmatic Example**
 
 First of all we have the receiver that has the implementation of every action that could be performed
-```php
+```swift
 // Receiver
 class Bulb
 {
@@ -1747,7 +1715,7 @@ class Bulb
 }
 ```
 then we have an interface that each of the commands are going to implement and then we have a set of commands
-```php
+```swift
 interface Command
 {
     public function execute();
@@ -1807,7 +1775,7 @@ class TurnOff implements Command
 }
 ```
 Then we have an `Invoker` with whom the client will interact to process any commands
-```php
+```swift
 // Invoker
 class RemoteControl
 {
@@ -1818,7 +1786,7 @@ class RemoteControl
 }
 ```
 Finally let's see how we can use it in our client
-```php
+```swift
 $bulb = new Bulb();
 
 $turnOn = new TurnOn($bulb);
@@ -1847,7 +1815,7 @@ Wikipedia says
 
 In PHP it is quite easy to implement using SPL (Standard PHP Library). Translating our radio stations example from above. First of all we have `RadioStation`
 
-```php
+```swift
 class RadioStation
 {
     protected $frequency;
@@ -1865,7 +1833,7 @@ class RadioStation
 ```
 Then we have our iterator
 
-```php
+```swift
 use Countable;
 use Iterator;
 
@@ -1922,7 +1890,7 @@ class StationList implements Countable, Iterator
 }
 ```
 And then it can be used as
-```php
+```swift
 $stationList = new StationList();
 
 $stationList->addStation(new RadioStation(89));
@@ -1955,7 +1923,7 @@ Here is the simplest example of a chat room (i.e. mediator) with users (i.e. col
 
 First of all, we have the mediator i.e. the chat room
 
-```php
+```swift
 interface ChatRoomMediator 
 {
     public function showMessage(User $user, string $message);
@@ -1975,7 +1943,7 @@ class ChatRoom implements ChatRoomMediator
 ```
 
 Then we have our users i.e. colleagues
-```php
+```swift
 class User {
     protected $name;
     protected $chatMediator;
@@ -1995,7 +1963,7 @@ class User {
 }
 ```
 And the usage
-```php
+```swift
 $mediator = new ChatRoom();
 
 $john = new User('John Doe', $mediator);
@@ -2028,7 +1996,7 @@ Lets take an example of text editor which keeps saving the state from time to ti
 
 First of all we have our memento object that will be able to hold the editor state
 
-```php
+```swift
 class EditorMemento
 {
     protected $content;
@@ -2047,7 +2015,7 @@ class EditorMemento
 
 Then we have our editor i.e. originator that is going to use memento object
 
-```php
+```swift
 class Editor
 {
     protected $content = '';
@@ -2076,7 +2044,7 @@ class Editor
 
 And then it can be used as
 
-```php
+```swift
 $editor = new Editor();
 
 // Type some stuff
@@ -2112,7 +2080,7 @@ Wikipedia says
 **Programmatic example**
 
 Translating our example from above. First of all we have job seekers that need to be notified for a job posting
-```php
+```swift
 class JobPost
 {
     protected $title;
@@ -2145,7 +2113,7 @@ class JobSeeker implements Observer
 }
 ```
 Then we have our job postings to which the job seekers will subscribe
-```php
+```swift
 class EmploymentAgency implements Observable
 {
     protected $observers = [];
@@ -2169,7 +2137,7 @@ class EmploymentAgency implements Observable
 }
 ```
 Then it can be used as
-```php
+```swift
 // Create subscribers
 $johnDoe = new JobSeeker('John Doe');
 $janeDoe = new JobSeeker('Jane Doe');
@@ -2202,7 +2170,7 @@ Wikipedia says
 
 Let's take an example of a zoo simulation where we have several different kinds of animals and we have to make them Sound. Let's translate this using visitor pattern
 
-```php
+```swift
 // Visitee
 interface Animal
 {
@@ -2218,7 +2186,7 @@ interface AnimalOperation
 }
 ```
 Then we have our implementations for the animals
-```php
+```swift
 class Monkey implements Animal
 {
     public function shout()
@@ -2259,7 +2227,7 @@ class Dolphin implements Animal
 }
 ```
 Let's implement our visitor
-```php
+```swift
 class Speak implements AnimalOperation
 {
     public function visitMonkey(Monkey $monkey)
@@ -2280,7 +2248,7 @@ class Speak implements AnimalOperation
 ```
 
 And then it can be used as
-```php
+```swift
 $monkey = new Monkey();
 $lion = new Lion();
 $dolphin = new Dolphin();
@@ -2293,7 +2261,7 @@ $dolphin->accept($speak);   // Tuut tutt tuutt!
 ```
 We could have done this simply by having an inheritance hierarchy for the animals but then we would have to modify the animals whenever we would have to add new actions to animals. But now we will not have to change them. For example, let's say we are asked to add the jump behavior to the animals, we can simply add that by creating a new visitor i.e.
 
-```php
+```swift
 class Jump implements AnimalOperation
 {
     public function visitMonkey(Monkey $monkey)
@@ -2313,7 +2281,7 @@ class Jump implements AnimalOperation
 }
 ```
 And for the usage
-```php
+```swift
 $jump = new Jump();
 
 $monkey->accept($speak);   // Ooh oo aa aa!
@@ -2342,7 +2310,7 @@ Wikipedia says
 
 Translating our example from above. First of all we have our strategy interface and different strategy implementations
 
-```php
+```swift
 interface SortStrategy
 {
     public function sort(array $dataset): array;
@@ -2372,7 +2340,7 @@ class QuickSortStrategy implements SortStrategy
 ```
 
 And then we have our client that is going to use any strategy
-```php
+```swift
 class Sorter
 {
     protected $sorter;
@@ -2389,7 +2357,7 @@ class Sorter
 }
 ```
 And it can be used as
-```php
+```swift
 $dataset = [1, 5, 4, 3, 2, 8];
 
 $sorter = new Sorter(new BubbleSortStrategy());
@@ -2417,7 +2385,7 @@ Let's take an example of text editor, it lets you change the state of text that 
 
 First of all we have our state interface and some state implementations
 
-```php
+```swift
 interface WritingState
 {
     public function write(string $words);
@@ -2448,7 +2416,7 @@ class DefaultText implements WritingState
 }
 ```
 Then we have our editor
-```php
+```swift
 class TextEditor
 {
     protected $state;
@@ -2470,7 +2438,7 @@ class TextEditor
 }
 ```
 And then it can be used as
-```php
+```swift
 $editor = new TextEditor(new DefaultText());
 
 $editor->type('First line');
@@ -2516,7 +2484,7 @@ Wikipedia says
 Imagine we have a build tool that helps us test, lint, build, generate build reports (i.e. code coverage reports, linting report etc) and deploy our app on the test server.
 
 First of all we have our base class that specifies the skeleton for the build algorithm
-```php
+```swift
 abstract class Builder
 {
 
@@ -2538,7 +2506,7 @@ abstract class Builder
 
 Then we can have our implementations
 
-```php
+```swift
 class AndroidBuilder extends Builder
 {
     public function test()
@@ -2587,7 +2555,7 @@ class IosBuilder extends Builder
 ```
 And then it can be used as
 
-```php
+```swift
 $androidBuilder = new AndroidBuilder();
 $androidBuilder->build();
 
