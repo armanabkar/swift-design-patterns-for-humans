@@ -54,11 +54,12 @@ In plain words
 Wikipedia says
 > In object-oriented computer programming, SOLID is a mnemonic acronym for five design principles intended to make software designs more understandable, flexible, and maintainable. The principles are a subset of many principles promoted by American software engineer and instructor Robert C. Martin, first introduced in his 2000 paper Design Principles and Design Patterns. Although the SOLID principles apply to any object-oriented design, they can also form a core philosophy for methodologies such as agile development or adaptive software development.
 
-* [The Single Responsibility Principle](#🔐-the-single-responsibility-principle)
-* [The Open Closed Principle](#✋-the-open-closed-principle)
-* [The Liskov Substitution Principle](#👥-the-liskov-substitution-principle)
-* [The Interface Segregation Principle](#🍴-the-interface-segregation-principle)
-* [The Dependency Inversion Principle](#🔝-the-dependency-inversion-principle)
+- [The Single Responsibility Principle](#-the-single-responsibility-principle)
+- [The Open Closed Principle](#-the-open-closed-principle)
+- [The Liskov Substitution Principle](#-the-liskov-substitution-principle)
+- [The Interface Segregation Principle](#-the-interface-segregation-principle)
+- [The Dependency Inversion Principle](#-the-dependency-inversion-principle)
+
 
 🔐 The Single Responsibility Principle
 --------------
@@ -336,6 +337,8 @@ mastermind.travelInTime(time: -3600 * 8760)
 ```
 
 [Source](https://github.com/ochococo/OOD-Principles-In-Swift)
+
+<!---
 
 Creational Design Patterns
 ==========================
@@ -2577,14 +2580,16 @@ $iosBuilder->build();
 
 ## 🚦 Wrap Up Folks
 
-And that about wraps it up. I will continue to improve this, so you might want to watch/star this repository to revisit. Also, I have plans on writing the same about the architectural patterns, stay tuned for it.
+And that about wraps it up. I will continue to improve this, so you might want to watch/star this repository to revisit.
+
+-->
 
 ## 👬 Contribution
 
 - Report issues
 - Open pull request with improvements
 - Spread the word
-- Reach out with any feedback [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamranahmedse.svg?style=social&label=Follow%20%40kamranahmedse)](https://twitter.com/kamranahmedse)
+- Reach out with any feedback at armanabkar@gmail.com
 
 ## License
 
